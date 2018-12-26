@@ -13,6 +13,14 @@ const io = socketio(server);
 
 app.use('/', express.static(path.join(__dirname + '/../' + '/public')));
 
+io.on('connection', (soc) => {
+    console.log('Conncetion established');
+
+    soc.on('disconnect', (dis) => {
+        console.log('User was disconnected');
+    });
+});
+
 
 console.log(port);
 
