@@ -7,7 +7,24 @@
     <body>
         <h1>CHAT APP!</h1>
 
+        <hr>
 
+        <form class='form'>
+            <p>Message box</p>
+            <div class='form_content'>
+                From: <input type='text' class='input_from' placeholder='Username...' name='from'>    
+                <br>
+                Text: <input type='text' class='input_text' placeholder='Input message here...' name='text'>
+                <br>
+                <button class='btn_send'>Send!</button>
+                <br>
+            </div>
+        </form>
+        Remove chat history: <button class='btn_remove_history'>Remove</button>
+
+        <hr>
+
+        <div class='incoming_messages_box'></div>
 
         <script src='/socket.io/socket.io.js'></script>
         <script src='./scripts/scripts.js'></script>
