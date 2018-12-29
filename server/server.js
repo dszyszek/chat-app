@@ -19,15 +19,15 @@ app.use('/', express.static(path.join(__dirname + '/../' + '/public')));
 io.on('connection', (soc) => {
     console.log('Conncetion established');
 
-    soc.emit('newMessage', {
+    soc.emit('newMessage', generateMessage({
         from: 'Admin',
         text: 'Welcome to the chat!'
-    });
+    }));
 
-    soc.broadcast.emit('newMessage', {
+    soc.broadcast.emit('newMessage', generateMessage({
         from: 'Admin',
         text: 'New user joined chat!'
-    });
+    }));
 
     soc.on('disconnect', (dis) => {
         console.log('User was disconnected');
