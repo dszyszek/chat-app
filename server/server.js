@@ -1,3 +1,5 @@
+// url: https://intense-temple-63546.herokuapp.com/
+
 const express = require('express');
 const socketio = require('socket.io');
 
@@ -15,6 +17,16 @@ app.use('/', express.static(path.join(__dirname + '/../' + '/public')));
 
 io.on('connection', (soc) => {
     console.log('Conncetion established');
+
+    soc.emit('newMessage', {
+        from: 'Admin',
+        text: 'Welcome to the chat!'
+    });
+
+    soc.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined chat!'
+    });
 
     soc.on('disconnect', (dis) => {
         console.log('User was disconnected');
