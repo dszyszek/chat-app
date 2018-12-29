@@ -6,6 +6,7 @@ const socketio = require('socket.io');
 const path = require('path');
 const http = require('http');
 
+const generateMessage = require('./utils/generateMessage');
 
 const port = process.env.PORT || 3000;
 
@@ -33,14 +34,7 @@ io.on('connection', (soc) => {
     });
 
     soc.on('createMessage', (message) => {
-        let time = new Date();
-        let formattedTime = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}, ${time.getDay()}.${time.getMonth()}.${time.getFullYear()}`;
-
-        let newMessage = {
-            from: message.from,
-            text: message.text,
-            createdAt: formattedTime
-        }
+        newMessage = generateMessage(message);
 
         io.emit('newMessage', newMessage);
     });
