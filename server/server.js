@@ -19,7 +19,22 @@ io.on('connection', (soc) => {
     soc.on('disconnect', (dis) => {
         console.log('User was disconnected');
     });
+
+    soc.on('createMessage', (message) => {
+        let time = new Date();
+        let formattedTime = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}, ${time.getDay()}.${time.getMonth()}.${time.getFullYear()}`;
+
+        let newMessage = {
+            from: message.from,
+            text: message.text,
+            createdAt: formattedTime
+        }
+
+        io.emit('newMessage', newMessage);
+    });
 });
+
+
 
 
 console.log(port);
