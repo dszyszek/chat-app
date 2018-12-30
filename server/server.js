@@ -38,6 +38,14 @@ io.on('connection', (soc) => {
 
         io.emit('newMessage', newMessage);
     });
+
+    soc.on('shareLocation', loc => {
+       let coordsMessage = generateMessage({
+            from: 'Admin',
+            text: `Location: ${loc.latitude}, ${loc.longitude}`
+        });
+        io.emit('newMessage', coordsMessage);
+    });
 });
 
 

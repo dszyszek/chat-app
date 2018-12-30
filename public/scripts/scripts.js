@@ -5,6 +5,7 @@ const input_from = document.querySelector('.input_from');
 const input_text = document.querySelector('.input_text');
 const incoming_messages_box = document.querySelector('.incoming_messages_box');
 const btn_remove_history = document.querySelector('.btn_remove_history');
+const send_location = document.querySelector('.send_location');
 
 socket.on('connect', () => {
     console.log('Connected to the sever!');
@@ -46,3 +47,14 @@ const clearInpuFields = () => {
     input_from.value = '';
     input_text.value = '';
 };
+
+send_location.addEventListener('click', e => {
+    if (!navigator.geolocation) return alert('Your browser doesn\'t support Geolocation');
+
+    navigator.geolocation.getCurrentPosition(pos => {
+        socket.emit('shareLocation', {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+        });
+    }, () => alert('Cannot fetch your location'));
+});
