@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const path = require('path');
 const http = require('http');
 
-const generateMessage = require('./utils/generateMessage');
+const {generateMessage, generateLocationMessage} = require('./utils/generateMessage');
 
 const port = process.env.PORT || 3000;
 
@@ -40,10 +40,9 @@ io.on('connection', (soc) => {
     });
 
     soc.on('shareLocation', loc => {
-       let coordsMessage = generateMessage({
-            from: 'Admin',
-            text: `Location: ${loc.latitude}, ${loc.longitude}`
-        });
+       let coordsLink = generateLocationMessage('Admin', [loc.latitude, loc.longitude]);
+       let coordsMessage = generateMessage(coordsLink);
+       coordsMessage.text = `Link to users location: ${coordsMessage.text}` // after adding React to the app, make that as a <a>location here</a>
         io.emit('newMessage', coordsMessage);
     });
 });

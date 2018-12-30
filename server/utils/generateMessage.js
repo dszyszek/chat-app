@@ -10,4 +10,15 @@ const generateMessage = (message) => {
         return newMessage
 };
 
-module.exports = generateMessage;
+const generateLocationMessage = (author, locationArray) => {
+    let link = `https://www.google.com/maps/?q=${locationArray[0]},${locationArray[1]}`;
+    return {
+        from: author,
+        text: link 
+    };
+};
+
+module.exports = {
+    generateMessage,
+    generateLocationMessage
+};
