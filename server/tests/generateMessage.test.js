@@ -21,9 +21,9 @@ describe('TEST generateMessage', () => {
 describe('TEST generateLocationMessage', () => {
 
     it('Should return proper link to google maps', () => {
-        let link = generateLocationMessage('Admin', [52.279986, 17.3522939]);
+        let link = generateLocationMessage('Admin', [11, 11]);
         
-        expect(link.text).toBe('https://www.google.com/maps/?q=52.279986,17.3522939');
+        expect(link.text).toBe('https://www.google.com/maps/?q=11,11');
     });
 
 });
