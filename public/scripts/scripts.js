@@ -52,6 +52,7 @@ send_location.addEventListener('click', e => {
     if (!navigator.geolocation) return alert('Your browser doesn\'t support Geolocation');
 
     navigator.geolocation.getCurrentPosition(pos => {
+        console.log(pos);
         socket.emit('shareLocation', {
             latitude: pos.coords.latitude,
             longitude: pos.coords.longitude
